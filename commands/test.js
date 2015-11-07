@@ -6,7 +6,7 @@ exports.command = function(url, callback){
   var tmp = {};
 
   client.click('span[id=credits_link]');
-  for (var i = 0; i < 307; i++){
+  for (var i = 0; i < 3; i++){
       tmp = {};
       //get caption
       client
@@ -42,16 +42,16 @@ exports.command = function(url, callback){
 	.waitForElementPresent('div[id=date1]',20000,false)
 	.getText('div[id=date1]',function(result){
 	  tmp.dates = [];
-	  tmp.dates.push(result.value);
+	  result.value != "" ? tmp.dates.push(result.value) : 0;
 	})
 	.getText('div[id=date2]',function(result){
-	  tmp.dates.push(result.value);
+	  result.value != "" ? tmp.dates.push(result.value) : 0;
 	})
 	.getText('div[id=date3]',function(result){
-	  tmp.dates.push(result.value);
+	  result.value != "" ? tmp.dates.push(result.value) : 0;
 	})
 	.getText('div[id=date4]',function(result){
-	  tmp.dates.push(result.value);
+	  result.value != "" ? tmp.dates.push(result.value) : 0;
 	})
 	.pause(1000)
         //get image url
@@ -71,7 +71,7 @@ exports.command = function(url, callback){
 	    fs.writeFile('data.txt',JSON.stringify(data), function(err){
 	      if (err) throw err;
 	      console.log('saved');
-	    })
+	    });
 	  }
 	})
 	.closeWindow()
